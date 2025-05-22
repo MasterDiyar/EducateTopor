@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bywa5slli8my6"]
+
+[ext_resource type="Script" uid="uid://6ec44ltbdo4u" path="res://game/items/Bullet.cs" id="1_68wpt"]
+[ext_resource type="Texture2D" uid="uid://dfgmwjcw1enjc" path="res://images/items/patron.png" id="1_ap72d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_68wpt"]
+size = Vector2(30, 10)
+
+[node name="Bullet" type="Area2D"]
+texture_filter = 3
+script = ExtResource("1_68wpt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ap72d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_68wpt")
+
+[node name="Timer" type="Timer" parent="."]

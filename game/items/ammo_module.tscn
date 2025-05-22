@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://beb74wjvf27gs"]
+
+[ext_resource type="Script" uid="uid://dbsccdmyldcsi" path="res://game/items/AmmoModule.cs" id="1_8vsam"]
+
+[node name="AmmoModule" type="Node2D"]
+script = ExtResource("1_8vsam")

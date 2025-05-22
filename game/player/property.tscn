@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqdsxo17ympda"]
+
+[ext_resource type="Script" uid="uid://dpa4j27sd4iv4" path="res://game/player/Property.cs" id="1_8poxv"]
+
+[node name="property" type="Node"]
+script = ExtResource("1_8poxv")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy2tlp7lxcuib"]
+
+[ext_resource type="Script" uid="uid://djn6wq1a4h4bv" path="res://game/player/WalkScript.cs" id="1_ji5aa"]
+
+[node name="walkscript" type="Node"]
+script = ExtResource("1_ji5aa")
