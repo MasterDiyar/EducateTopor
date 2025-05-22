@@ -4,14 +4,18 @@ using System;
 public partial class Player : CharacterBody2D
 {
 	public const float Speed = 80.0f;
-
+	private Weapon _weapon;
 	public override void _Ready()
 	{
 		GetNode<AnimatedSprite2D>("AnimatedSprite2D").Play("move");
+		_weapon = GetNode<Weapon>("weapon");
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
+		Attack();
+		
+		
 		Vector2 velocity = Velocity;
 		
 		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
@@ -28,5 +32,11 @@ public partial class Player : CharacterBody2D
 
 		Velocity = velocity;
 		MoveAndSlide();
+	}
+
+	private void Attack(bool type = false)
+	{
+		if (Input.IsActionPressed("attack"))
+			_weapon.Fire();
 	}
 }

@@ -1,6 +1,15 @@
 using Godot;
 using newcorrupt.game.extraUtilities;
 
+
+/*
+ * DamageModule <= There all damage will be saved
+ * Ammo <= Get ammo count
+ * FireType <= For change type of attack
+ * FireRate <= Fire Rate
+ * ProjectileModule <= Spawn bullet
+ * Item <= Texture, Name, id of weapon
+ */
 public partial class Weapon : Sprite2D
 {
     [Export] public DamageModule Damage;
@@ -13,11 +22,11 @@ public partial class Weapon : Sprite2D
     public override void _Ready()
     {
         Texture = GD.Load<Texture2D>(Item.TextureRoot);
-        Damage = GetNode<DamageModule>("DamageModule");
-        Ammo = GetNode<AmmoModule>("AmmoModule");
-        FireType = GetNode<FireTypeModule>("FireTypeModule");
-        FireRate = GetNode<FireRateModule>("FireRateModule");
-        Projectile = GetNode<ProjectileModule>("ProjectileModule");
+        Damage = Damage??GetNode<DamageModule>("DamageModule");
+        Ammo = Ammo??GetNode<AmmoModule>("AmmoModule");
+        FireType = FireType??GetNode<FireTypeModule>("FireTypeModule");
+        FireRate = FireRate??GetNode<FireRateModule>("FireRateModule");
+        Projectile = Projectile??GetNode<ProjectileModule>("ProjectileModule");
     }
 
     public void Fire()
@@ -29,6 +38,11 @@ public partial class Weapon : Sprite2D
             Ammo.ConsumeAmmo();
             FireType.Fire(Damage, Projectile);
         }
+    }
+    
+    public int[] GetAmmo()
+    {
+        return [Ammo.AmmoRemaining, Ammo.CurrentAmmo];
     }
     
 }

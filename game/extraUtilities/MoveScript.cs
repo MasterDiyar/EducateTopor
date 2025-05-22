@@ -41,6 +41,9 @@ public class MoveScript
         nullItem.TextureRoot = "res://newcorrupt/images/items/tears.png";
         return nullItem;
     }
+    
+    
+    
 
     public void TextParce(string text)
     {

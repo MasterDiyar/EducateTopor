@@ -1,0 +1,9 @@
+{
+  "Damage": 4,
+  "Cartridge": 30,
+  "Max ammo": 120,
+  "Current ammo": 120,
+  "Fire type": "default",
+  "Fire delay": 0.5,
+  "bullet type": "default"
+}

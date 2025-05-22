@@ -80,3 +80,5 @@ MobType = "Player"
 layer = 128
 
 [node name="PlayerIntertface" parent="CanvasLayer" instance=ExtResource("10_b51sn")]
+
+[node name="weapon" type="Sprite2D" parent="."]
