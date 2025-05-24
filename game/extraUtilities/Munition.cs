@@ -21,7 +21,7 @@ public  class Munition : Item
         public int CurrentAmmo { get; set; }
         public string FireType { get; set; }
         public float FireDelay { get; set; }
-        public string BulletType { get; set; }
+        public string BulletType { get; init; }
     }
     
     
