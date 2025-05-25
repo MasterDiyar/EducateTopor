@@ -15,12 +15,12 @@ public  class Munition : Item
 
     public class WeaponProperty
     {
-        public float Damage { get; set; }
-        public int Cartridge { get; set; }
-        public int MaxAmmo { get; set; }
-        public int CurrentAmmo { get; set; }
-        public string FireType { get; set; }
-        public float FireDelay { get; set; }
+        public float  Damage { get;  init; }
+        public int    Cartridge { get;  init; }
+        public int    MaxAmmo { get; init; }
+        public int    CurrentAmmo { get; init; }
+        public string FireType { get;  init; }
+        public float  FireDelay { get;  init; }
         public string BulletType { get; init; }
     }
     
