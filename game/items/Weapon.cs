@@ -22,11 +22,11 @@ public partial class Weapon : Sprite2D
     public override void _Ready()
     {
         Texture = GD.Load<Texture2D>(Item.TextureRoot);
-        Damage = Damage??GetNode<DamageModule>("DamageModule");
-        Ammo = Ammo??GetNode<AmmoModule>("AmmoModule");
-        FireType = FireType??GetNode<FireTypeModule>("FireTypeModule");
-        FireRate = FireRate??GetNode<FireRateModule>("FireRateModule");
-        Projectile = Projectile??GetNode<ProjectileModule>("ProjectileModule");
+        Damage = Damage ?? GetNode<DamageModule>("DamageModule");
+        Ammo = Ammo ?? GetNode<AmmoModule>("AmmoModule");
+        FireType = FireType ?? GetNode<FireTypeModule>("FireTypeModule");
+        FireRate = FireRate ?? GetNode<FireRateModule>("FireRateModule");
+        Projectile = Projectile ?? GetNode<ProjectileModule>("ProjectileModule");
     }
 
     public void Fire()
@@ -39,10 +39,12 @@ public partial class Weapon : Sprite2D
             FireType.Fire(Damage, Projectile);
         }
     }
-    
+
     public int[] GetAmmo()
     {
         return [Ammo.AmmoRemaining, Ammo.CurrentAmmo];
     }
+    
+    
     
 }

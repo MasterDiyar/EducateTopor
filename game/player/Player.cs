@@ -5,10 +5,13 @@ public partial class Player : CharacterBody2D
 {
 	public const float Speed = 80.0f;
 	private Weapon _weapon;
+	private Node2D _weaponSlot;
 	public override void _Ready()
 	{
 		GetNode<AnimatedSprite2D>("AnimatedSprite2D").Play("move");
-		_weapon = GetNode<Weapon>("weapon");
+		_weaponSlot = GetNode("WeaponSlot") as Node2D;
+		_weapon = _weaponSlot.GetNode<Weapon>("weapon");
+
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -33,6 +36,22 @@ public partial class Player : CharacterBody2D
 		Velocity = velocity;
 		MoveAndSlide();
 	}
+	public void EquipWeapon(PackedScene weaponScene)
+    {
+        // удалить старое оружие
+        if (_weapon != null)
+        {
+            _weapon.QueueFree();
+            _weapon = null;
+        }
+
+        var newWeaponNode = weaponScene.Instantiate<Weapon>();
+        _weaponSlot.AddChild(newWeaponNode);
+        _weapon = newWeaponNode;
+    }
+
+	//В качестве временного решения движение игрока и смена оружия будет находится в главном скрипте
+	//Потенциальное перемещение кода будет когда код будет совсем не читабельным
 
 	private void Attack(bool type = false)
 	{

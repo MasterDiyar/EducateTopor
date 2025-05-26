@@ -1,0 +1,21 @@
+[gd_scene load_steps=7 format=3 uid="uid://caaqkd0bwevpa"]
+
+[ext_resource type="Script" uid="uid://bsdhg84a4fplw" path="res://game/items/weapon/Ak47.cs" id="1_gj7xh"]
+[ext_resource type="PackedScene" uid="uid://bgnhqd0mss4xv" path="res://game/items/damage_module.tscn" id="2_04ovy"]
+[ext_resource type="PackedScene" uid="uid://beb74wjvf27gs" path="res://game/items/ammo_module.tscn" id="3_c8xo1"]
+[ext_resource type="PackedScene" uid="uid://dhjdog2cwx4xe" path="res://game/items/fire_type_module.tscn" id="4_dokiy"]
+[ext_resource type="PackedScene" uid="uid://eplbawpnxiym" path="res://game/items/fire_rate_module.tscn" id="5_blvnx"]
+[ext_resource type="PackedScene" uid="uid://b40rs845eau6c" path="res://game/items/projectile_module.tscn" id="6_uixaj"]
+
+[node name="AK47" type="Sprite2D"]
+script = ExtResource("1_gj7xh")
+
+[node name="DamageModule" parent="." instance=ExtResource("2_04ovy")]
+
+[node name="AmmoModule" parent="." instance=ExtResource("3_c8xo1")]
+
+[node name="FireTypeModule" parent="." instance=ExtResource("4_dokiy")]
+
+[node name="FireRateModule" parent="." instance=ExtResource("5_blvnx")]
+
+[node name="ProjectileModule" parent="." instance=ExtResource("6_uixaj")]
