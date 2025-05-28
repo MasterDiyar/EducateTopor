@@ -1,5 +1,5 @@
 {
-  "name": "Ak47",
-  "Texture":"res://images/weapon/ak47.png",
-  "ID": 1
+  "Name": "ak47",
+  "TextureRoot":"res://images/weapon/ak47.png",
+  "Id": 1
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dyarqds3wov1y"]
+[gd_scene load_steps=14 format=3 uid="uid://dyarqds3wov1y"]
 
 [ext_resource type="Texture2D" uid="uid://ciolxwdc72f0o" path="res://images/player/zhukov1.png" id="1_8cf8e"]
 [ext_resource type="Script" uid="uid://dvimw5yqqwe7y" path="res://game/player/Player.cs" id="1_wcm5h"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bv6fu5t2m3p8e" path="res://images/player/zhukov8.png" id="7_ohvm5"]
 [ext_resource type="PackedScene" uid="uid://dqdsxo17ympda" path="res://game/player/property.tscn" id="9_o7uqf"]
 [ext_resource type="PackedScene" uid="uid://u4xkhg5ccicl" path="res://game/ui/player_intertface.tscn" id="10_b51sn"]
+[ext_resource type="PackedScene" uid="uid://caaqkd0bwevpa" path="res://game/items/weapon/Ak47.tscn" id="11_b72hb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o7uqf"]
 radius = 12.0
@@ -82,3 +83,6 @@ layer = 128
 [node name="PlayerIntertface" parent="CanvasLayer" instance=ExtResource("10_b51sn")]
 
 [node name="WeaponSlot" type="Node2D" parent="."]
+
+[node name="AK47" parent="WeaponSlot" instance=ExtResource("11_b72hb")]
+ID = 1

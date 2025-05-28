@@ -1,6 +1,7 @@
 using System.IO;
 using Godot;
 using System.Text.Json;
+using FileAccess = Godot.FileAccess;
 
 namespace newcorrupt.game.extraUtilities;
 
@@ -26,21 +27,8 @@ public class MoveScript
     
     
 
-    public Item ItemParser(string path)
-    {
-        if (File.Exists(path))
-        {
-            string Jsontext = File.ReadAllText(path);
-            Item item = JsonSerializer.Deserialize<Item>(Jsontext);
-            return item;
-        }        
-        //if item not exists:
-        Item nullItem = new Item();
-        nullItem.Name = "null";
-        nullItem.Id = -1;
-        nullItem.TextureRoot = "res://newcorrupt/images/items/tears.png";
-        return nullItem;
-    }
+    public Item ItemParser(string path) => JsonSerializer.Deserialize<Item>(FileAccess.Open(path, FileAccess.ModeFlags.Read).GetAsText());
+    
     
     
     

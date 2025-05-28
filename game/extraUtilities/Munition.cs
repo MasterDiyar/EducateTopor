@@ -1,7 +1,9 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Godot;
+using FileAccess = Godot.FileAccess;
 
 namespace newcorrupt.game.extraUtilities;
 
@@ -10,6 +12,7 @@ public class Munition : Item
     private readonly MoveScript _script = new MoveScript();
     private class IList
     {
+        [JsonPropertyName("item name")]
         public string[] Items { get; init; }
     }
 
@@ -26,19 +29,9 @@ public class Munition : Item
 
 
 
-    public string GetItemById(int itemId)
-    {
-        string jsonText = File.ReadAllText("game/items/json/idtoitem.json");
-        IList item = JsonSerializer.Deserialize<IList>(jsonText);
-
-        return item.Items[itemId];
-    }
-
-    public WeaponProperty GetPropertyByName(string name){
-        string jsonText = File.ReadAllText($"game/items/props/{name}prop.json");
-        return JsonSerializer.Deserialize<WeaponProperty>(jsonText);
-    }
-
+    public string GetItemNameById(int itemId) => JsonSerializer.Deserialize<IList>(FileAccess.Open("res://game/items/json/idtoitem.json", FileAccess.ModeFlags.Read).GetAsText()).Items[itemId];
+    public Item GetItemById(int itemId) => _script.ItemParser($"res://game/items/json/{GetItemNameById(itemId)}.json");
+    public WeaponProperty GetPropertyByName(string name) => JsonSerializer.Deserialize<WeaponProperty>(FileAccess.Open($"res://game/items/props/{name}prop.json", FileAccess.ModeFlags.Read).GetAsText());
     public FireTypeModule SetFireType(string type) => type switch
     {
         "default" => new FireTypeModule(),
@@ -55,11 +48,11 @@ public class Munition : Item
 
     public Weapon SetWeapon(int id)
     {
-        var item = GetItemById(id);
+        var item = GetItemNameById(id);
         Weapon newWeapon = new Weapon();
         WeaponProperty weaponProperty = GetPropertyByName(item);
 
-        newWeapon.Item = _script.ItemParser($"game/items/json/{item}.json");
+        newWeapon.Item = _script.ItemParser($"res://game/items/json/{item}.json");
         newWeapon.Damage.DamageAmount = weaponProperty.Damage;
         newWeapon.Ammo.MaxAmmo = weaponProperty.MaxAmmo;
         newWeapon.Ammo.CurrentAmmo = weaponProperty.CurrentAmmo;
@@ -72,6 +65,6 @@ public class Munition : Item
 
     public Weapon GetReadyWeapon(int id) => GetWeaponScene(id).Instantiate<Weapon>();
         
-    public PackedScene GetWeaponScene(int id) => GD.Load<PackedScene>($"res://game/items/weapon/{_script.ItemParser($"game/items/json/{GetItemById(id)}.json").Name}.tscn");
+        public PackedScene GetWeaponScene(int id) => GD.Load<PackedScene>($"res://game/items/weapon/{_script.ItemParser($"res://game/items/json/{GetItemNameById(id)}.json").Name}.tscn");
 
 }

@@ -12,6 +12,7 @@ using newcorrupt.game.extraUtilities;
  */
 public partial class Weapon : Sprite2D
 {
+    [Export] public int ID;
     [Export] public DamageModule Damage;
     [Export] public AmmoModule Ammo;
     [Export] public FireTypeModule FireType;
@@ -21,6 +22,8 @@ public partial class Weapon : Sprite2D
 
     public override void _Ready()
     {
+        Munition mun= new Munition();
+        Item = mun.GetItemById(ID);
         Texture = GD.Load<Texture2D>(Item.TextureRoot);
         Damage = Damage ?? GetNode<DamageModule>("DamageModule");
         Ammo = Ammo ?? GetNode<AmmoModule>("AmmoModule");

@@ -10,7 +10,7 @@ public partial class Player : CharacterBody2D
 	{
 		GetNode<AnimatedSprite2D>("AnimatedSprite2D").Play("move");
 		_weaponSlot = GetNode("WeaponSlot") as Node2D;
-		_weapon = _weaponSlot.GetNode<Weapon>("weapon");
+		_weapon = _weaponSlot?.GetChild<Weapon>(0);
 
 	}
 

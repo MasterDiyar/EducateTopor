@@ -2,7 +2,9 @@ using Godot;
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using newcorrupt.game.extraUtilities;
+using FileAccess = Godot.FileAccess;
 
 public partial class PlayerIntertface : Control
 {
@@ -13,8 +15,11 @@ public partial class PlayerIntertface : Control
 
 	public class Inventory
 	{
+		[JsonPropertyName("itemID")]		
 		public int[] ItemID { get; set; }
-		public int[] ammoCount { get; set; }
+		
+		[JsonPropertyName("ammo typecount")]
+		public int[] AmmoCount { get; set; }
 	}
 	
 	
@@ -28,13 +33,13 @@ public partial class PlayerIntertface : Control
 	Munition munition;
 	public override void _Ready()
 	{
-		inventory = JsonSerializer.Deserialize<Inventory>(File.ReadAllText("game/player/data/inventory.json"));
+		inventory = JsonSerializer.Deserialize<Inventory>(FileAccess.Open("res://game/player/data/inventory.json", FileAccess.ModeFlags.Read).GetAsText());
 		munition = new();
-		FirWe = munition.GetWeaponScene(inventory.ItemID[1]);
+		FirWe = munition.GetWeaponScene(inventory.ItemID[0]);
 		_properties = GetNode<Label>("Label");
 		_player = GetParent().GetParent<Player>();
 		_prop = _player.GetNode<Property>("property");
-		CurrentWeapon = _player.GetNode<Weapon>("weapon");
+		CurrentWeapon = _player.GetNode<Node2D>("WeaponSlot").GetChild<Weapon>(0);
 
 	}
 
@@ -48,7 +53,7 @@ public partial class PlayerIntertface : Control
 	{
 		if (File.Exists(path))
 		{
-			string jsonText = File.ReadAllText(path);
+			string jsonText = FileAccess.Open(path, FileAccess.ModeFlags.Read).GetAsText();
 			Item item = JsonSerializer.Deserialize<Item>(jsonText);
 		}   
 	}

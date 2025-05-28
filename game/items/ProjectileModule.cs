@@ -13,7 +13,8 @@ public partial class ProjectileModule : Node2D
 		var angledPosition = new Vector2(Mathf.Cos(Weapon.Rotation), Mathf.Sin(Weapon.Rotation));
 		var instance = (Bullet)ProjectileScene.Instantiate();
 		instance.Damage = damage;
+		instance.FlyDuration = 1f;
 		instance.Position = GetParent<Node2D>().GetParent<Node2D>().Position + 16*angledPosition;
-		GetParent().GetParent().GetParent().AddChild(instance); //map::player::weapon
+		GetParent().GetParent().GetParent().GetParent().AddChild(instance); //map::player::weapon
 	}
 }

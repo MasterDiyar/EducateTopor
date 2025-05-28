@@ -11,7 +11,7 @@ public partial class ItemSet : Node2D
     {
         Munition munition = new();
         MoveScript script = new();
-        ThisItem = script.ItemParser(munition.GetItemById(id));
+        ThisItem = script.ItemParser(munition.GetItemNameById(id));
         parent = GetParent<Weapon>();
         parent.Item = ThisItem;
     }

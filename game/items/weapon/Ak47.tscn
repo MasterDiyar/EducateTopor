@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://caaqkd0bwevpa"]
+[gd_scene load_steps=9 format=3 uid="uid://caaqkd0bwevpa"]
 
 [ext_resource type="Script" uid="uid://bsdhg84a4fplw" path="res://game/items/weapon/Ak47.cs" id="1_gj7xh"]
 [ext_resource type="PackedScene" uid="uid://bgnhqd0mss4xv" path="res://game/items/damage_module.tscn" id="2_04ovy"]
@@ -6,9 +6,16 @@
 [ext_resource type="PackedScene" uid="uid://dhjdog2cwx4xe" path="res://game/items/fire_type_module.tscn" id="4_dokiy"]
 [ext_resource type="PackedScene" uid="uid://eplbawpnxiym" path="res://game/items/fire_rate_module.tscn" id="5_blvnx"]
 [ext_resource type="PackedScene" uid="uid://b40rs845eau6c" path="res://game/items/projectile_module.tscn" id="6_uixaj"]
+[ext_resource type="PackedScene" uid="uid://bywa5slli8my6" path="res://game/items/bullet.tscn" id="7_04ovy"]
+[ext_resource type="PackedScene" uid="uid://bwqrh40qkdxl2" path="res://game/items/mouse_track.tscn" id="8_c8xo1"]
 
-[node name="AK47" type="Sprite2D"]
+[node name="AK47" type="Sprite2D" node_paths=PackedStringArray("Damage", "Ammo", "FireType", "FireRate", "Projectile")]
 script = ExtResource("1_gj7xh")
+Damage = NodePath("DamageModule")
+Ammo = NodePath("AmmoModule")
+FireType = NodePath("FireTypeModule")
+FireRate = NodePath("FireRateModule")
+Projectile = NodePath("ProjectileModule")
 
 [node name="DamageModule" parent="." instance=ExtResource("2_04ovy")]
 
@@ -18,4 +25,9 @@ script = ExtResource("1_gj7xh")
 
 [node name="FireRateModule" parent="." instance=ExtResource("5_blvnx")]
 
-[node name="ProjectileModule" parent="." instance=ExtResource("6_uixaj")]
+[node name="ProjectileModule" parent="." node_paths=PackedStringArray("Weapon") instance=ExtResource("6_uixaj")]
+ProjectileScene = ExtResource("7_04ovy")
+Weapon = NodePath("..")
+
+[node name="MouseTrack" parent="." node_paths=PackedStringArray("Target") instance=ExtResource("8_c8xo1")]
+Target = NodePath("..")
