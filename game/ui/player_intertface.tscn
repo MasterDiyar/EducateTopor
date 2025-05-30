@@ -80,7 +80,7 @@ paragraph_spacing = 7.5
 font = ExtResource("9_aoxcs")
 font_size = 18
 
-[node name="PlayerIntertface" type="Control"]
+[node name="PlayerIntertface" type="Control" node_paths=PackedStringArray("inv1", "inv2", "inv3")]
 texture_filter = 3
 layout_mode = 3
 anchors_preset = 15
@@ -89,6 +89,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7sag0")
+inv1 = NodePath("inv1")
+inv2 = NodePath("inv2")
+inv3 = NodePath("inv3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(21, 112)

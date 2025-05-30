@@ -25,6 +25,9 @@ public partial class Weapon : Sprite2D
         Munition mun= new Munition();
         Item = mun.GetItemById(ID);
         Texture = GD.Load<Texture2D>(Item.TextureRoot);
+
+        Scale = new Vector2(24f / Texture.GetSize().X ,24f / Texture.GetSize().Y );
+        
         Damage = Damage ?? GetNode<DamageModule>("DamageModule");
         Ammo = Ammo ?? GetNode<AmmoModule>("AmmoModule");
         FireType = FireType ?? GetNode<FireTypeModule>("FireTypeModule");

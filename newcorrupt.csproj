@@ -5,6 +5,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="game\items\json\ak47.json" />
+    <Content Include="game\items\json\colt.json" />
     <Content Include="game\items\json\idtoitem.json" />
   </ItemGroup>
 </Project>

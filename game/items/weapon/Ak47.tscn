@@ -18,12 +18,14 @@ FireRate = NodePath("FireRateModule")
 Projectile = NodePath("ProjectileModule")
 
 [node name="DamageModule" parent="." instance=ExtResource("2_04ovy")]
+DamageAmount = 11.0
 
 [node name="AmmoModule" parent="." instance=ExtResource("3_c8xo1")]
 
 [node name="FireTypeModule" parent="." instance=ExtResource("4_dokiy")]
 
 [node name="FireRateModule" parent="." instance=ExtResource("5_blvnx")]
+FireDelay = 0.2
 
 [node name="ProjectileModule" parent="." node_paths=PackedStringArray("Weapon") instance=ExtResource("6_uixaj")]
 ProjectileScene = ExtResource("7_04ovy")

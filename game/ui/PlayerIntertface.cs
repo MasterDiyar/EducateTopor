@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -22,7 +23,7 @@ public partial class PlayerIntertface : Control
 		public int[] AmmoCount { get; set; }
 	}
 	
-	
+	private List<WeaponSlotData> _slotData; 
 	public Weapon FirstWeapon, SecondWeapon, ThirdWeapon, CurrentWeapon;
 	public PackedScene FirWe, SecWe, ThirWe;
 	private Player _player;
@@ -31,21 +32,36 @@ public partial class PlayerIntertface : Control
 	private Property _prop;
 	Inventory inventory;
 	Munition munition;
+
+	[Export]private Button inv1, inv2, inv3;
 	public override void _Ready()
 	{
+		munition = new Munition();
 		inventory = JsonSerializer.Deserialize<Inventory>(FileAccess.Open("res://game/player/data/inventory.json", FileAccess.ModeFlags.Read).GetAsText());
-		munition = new();
-		FirWe = munition.GetWeaponScene(inventory.ItemID[0]);
+		_slotData = new List<WeaponSlotData>
+		{
+			new(inv1, munition.GetWeaponScene(inventory.ItemID[0]).Instantiate<Weapon>(), munition.GetWeaponScene(inventory.ItemID[0])),
+			new(inv2, munition.GetWeaponScene(inventory.ItemID[1]).Instantiate<Weapon>(), munition.GetWeaponScene(inventory.ItemID[1])),
+			new(inv3, munition.GetWeaponScene(inventory.ItemID[2]).Instantiate<Weapon>(), munition.GetWeaponScene(inventory.ItemID[2]))
+		};
+		
 		_properties = GetNode<Label>("Label");
 		_player = GetParent().GetParent<Player>();
 		_prop = _player.GetNode<Property>("property");
 		CurrentWeapon = _player.GetNode<Node2D>("WeaponSlot").GetChild<Weapon>(0);
 
+		foreach (var slot in _slotData)
+		{
+			slot.Button.Pressed += (() => Equip(slot));
+			slot.Button.GetNode<TextureRect>("TextureRect").Texture = slot.WeaponRef.Texture;
+		}
+		
 	}
 
 	
 	public override void _Process(double delta)
 	{
+		PickItem();
 		_properties.Text = $"x {_prop.Hp}\nx {CurrentWeapon.GetAmmo()[0]}\n {CurrentWeapon.GetAmmo()[1]}";
 	}
 
@@ -60,21 +76,29 @@ public partial class PlayerIntertface : Control
 
 	private void PickItem()
 	{
-		if (Input.IsActionJustPressed("one"))
+		for (int i = 0; i < _slotData.Count; i++)
 		{
-			CurrentWeapon = FirstWeapon;
-			_player.EquipWeapon(FirWe);
-		}
 
-		if (Input.IsActionJustPressed("two"))
-		{
-			CurrentWeapon = SecondWeapon;
-		}
+			string actionName = i switch
+			{
+				0 => "one",
+				1 => "two",
+				2 => "three",
+				_ => null
+			};
 
-		if (Input.IsActionJustPressed("three"))
-		{
-			CurrentWeapon = ThirdWeapon;
+			if (!string.IsNullOrEmpty(actionName) && Input.IsActionJustPressed(actionName))
+			{
+				Equip(_slotData[i]);
+				break; 
+			}
 		}
+	}
+
+	private void Equip(WeaponSlotData slot)
+	{
+		CurrentWeapon = slot.WeaponRef;
+		_player.EquipWeapon(slot.Scene);
 	}
 	
 }

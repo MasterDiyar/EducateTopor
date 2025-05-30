@@ -30,7 +30,7 @@ public partial class Levelselect : Control
 	private void _on_first_pressed()
 	{
 		var level = GD.Load<PackedScene>("res://game/map/testworld.tscn").Instantiate();
-		
+		GetParent().AddChild(level);
 		QueueFree();
 	}
 }

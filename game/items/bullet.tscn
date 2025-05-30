@@ -8,6 +8,7 @@ size = Vector2(30, 10)
 
 [node name="Bullet" type="Area2D"]
 texture_filter = 3
+scale = Vector2(0.15, 0.15)
 script = ExtResource("1_68wpt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
