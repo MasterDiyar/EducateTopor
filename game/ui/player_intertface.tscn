@@ -147,7 +147,7 @@ layout_mode = 0
 offset_left = 5.0
 offset_top = 5.0
 offset_right = 133.0
-offset_bottom = 137.0
+offset_bottom = 133.0
 texture = ExtResource("11_wnqeh")
 
 [node name="inv2" type="Button" parent="."]
@@ -162,8 +162,10 @@ flat = true
 
 [node name="TextureRect" type="TextureRect" parent="inv2"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 133.0
+offset_bottom = 133.0
 
 [node name="inv3" type="Button" parent="."]
 layout_mode = 0
@@ -177,5 +179,7 @@ flat = true
 
 [node name="TextureRect" type="TextureRect" parent="inv3"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 133.0
+offset_bottom = 133.0

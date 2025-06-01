@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using newcorrupt.game.extraUtilities;
 
 public partial class Levelselect : Control
 {
@@ -22,14 +23,10 @@ public partial class Levelselect : Control
 		_first.Pressed += _on_first_pressed;
 	}
 
-	
-	public override void _Process(double delta)
-	{
-	}
-
 	private void _on_first_pressed()
 	{
 		var level = GD.Load<PackedScene>("res://game/map/testworld.tscn").Instantiate();
+		new JsonTwoDot().GetFromStatic();
 		GetParent().AddChild(level);
 		QueueFree();
 	}

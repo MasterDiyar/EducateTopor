@@ -33,6 +33,8 @@ public partial class Weapon : Sprite2D
         FireType = FireType ?? GetNode<FireTypeModule>("FireTypeModule");
         FireRate = FireRate ?? GetNode<FireRateModule>("FireRateModule");
         Projectile = Projectile ?? GetNode<ProjectileModule>("ProjectileModule");
+        
+        
     }
 
     public void Fire()
@@ -46,10 +48,8 @@ public partial class Weapon : Sprite2D
         }
     }
 
-    public int[] GetAmmo()
-    {
-        return [Ammo.AmmoRemaining, Ammo.CurrentAmmo];
-    }
+    public int[] GetAmmo() => [Ammo.AmmoRemaining, Ammo.CurrentAmmo];
+    
     
     
     

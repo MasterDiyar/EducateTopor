@@ -37,7 +37,7 @@ public partial class PlayerIntertface : Control
 	public override void _Ready()
 	{
 		munition = new Munition();
-		inventory = JsonSerializer.Deserialize<Inventory>(FileAccess.Open("res://game/player/data/inventory.json", FileAccess.ModeFlags.Read).GetAsText());
+		inventory = JsonSerializer.Deserialize<Inventory>(FileAccess.Open("res://game/player/data/inventory.json", FileAccess.ModeFlags.Read).GetAsText()); 
 		_slotData = new List<WeaponSlotData>
 		{
 			new(inv1, munition.GetWeaponScene(inventory.ItemID[0]).Instantiate<Weapon>(), munition.GetWeaponScene(inventory.ItemID[0])),
@@ -48,12 +48,15 @@ public partial class PlayerIntertface : Control
 		_properties = GetNode<Label>("Label");
 		_player = GetParent().GetParent<Player>();
 		_prop = _player.GetNode<Property>("property");
-		CurrentWeapon = _player.GetNode<Node2D>("WeaponSlot").GetChild<Weapon>(0);
-
-		foreach (var slot in _slotData)
+		CurrentWeapon = _slotData[0].WeaponRef;
+		var mun = new Munition();
+		for (int i = 0; i < _slotData.Count; i++)
 		{
+			
+			var slot = _slotData[i];
 			slot.Button.Pressed += (() => Equip(slot));
-			slot.Button.GetNode<TextureRect>("TextureRect").Texture = slot.WeaponRef.Texture;
+			slot.Button.GetNode<TextureRect>("TextureRect").Texture =
+				GD.Load<Texture2D>(mun.GetItemById(inventory.ItemID[i]).TextureRoot);
 		}
 		
 	}
@@ -81,9 +84,9 @@ public partial class PlayerIntertface : Control
 
 			string actionName = i switch
 			{
-				0 => "one",
-				1 => "two",
-				2 => "three",
+				0 => "1",
+				1 => "2",
+				2 => "3",
 				_ => null
 			};
 

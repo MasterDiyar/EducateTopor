@@ -65,6 +65,6 @@ public class Munition : Item
 
     public Weapon GetReadyWeapon(int id) => GetWeaponScene(id).Instantiate<Weapon>();
         
-        public PackedScene GetWeaponScene(int id) => GD.Load<PackedScene>($"res://game/items/weapon/{_script.ItemParser($"res://game/items/json/{GetItemNameById(id)}.json").Name}.tscn");
+    public PackedScene GetWeaponScene(int id) => GD.Load<PackedScene>($"res://game/items/weapon/{_script.ItemParser($"res://game/items/json/{GetItemNameById(id)}.json").Name}.tscn");
 
 }

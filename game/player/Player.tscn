@@ -83,7 +83,6 @@ layer = 128
 [node name="PlayerIntertface" parent="CanvasLayer" instance=ExtResource("10_b51sn")]
 
 [node name="WeaponSlot" type="Node2D" parent="."]
+position = Vector2(-4, 8)
 
 [node name="AK47" parent="WeaponSlot" instance=ExtResource("11_b72hb")]
-position = Vector2(-4, 8)
-ID = 1

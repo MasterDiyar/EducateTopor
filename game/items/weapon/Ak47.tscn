@@ -11,6 +11,7 @@
 
 [node name="AK47" type="Sprite2D" node_paths=PackedStringArray("Damage", "Ammo", "FireType", "FireRate", "Projectile")]
 script = ExtResource("1_gj7xh")
+ID = 1
 Damage = NodePath("DamageModule")
 Ammo = NodePath("AmmoModule")
 FireType = NodePath("FireTypeModule")
@@ -20,7 +21,8 @@ Projectile = NodePath("ProjectileModule")
 [node name="DamageModule" parent="." instance=ExtResource("2_04ovy")]
 DamageAmount = 11.0
 
-[node name="AmmoModule" parent="." instance=ExtResource("3_c8xo1")]
+[node name="AmmoModule" parent="." node_paths=PackedStringArray("MyWeapon") instance=ExtResource("3_c8xo1")]
+MyWeapon = NodePath("..")
 
 [node name="FireTypeModule" parent="." instance=ExtResource("4_dokiy")]
 

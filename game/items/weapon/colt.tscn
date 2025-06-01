@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://diyb3g1i11t2w"]
+[gd_scene load_steps=9 format=3 uid="uid://diyb3g1i11t2w"]
 
 [ext_resource type="Script" uid="uid://bey14torvarvp" path="res://game/items/weapon/Colt.cs" id="1_vnh21"]
 [ext_resource type="PackedScene" uid="uid://bgnhqd0mss4xv" path="res://game/items/damage_module.tscn" id="2_n1ms2"]
@@ -7,16 +7,22 @@
 [ext_resource type="PackedScene" uid="uid://eplbawpnxiym" path="res://game/items/fire_rate_module.tscn" id="5_i6mwk"]
 [ext_resource type="PackedScene" uid="uid://b40rs845eau6c" path="res://game/items/projectile_module.tscn" id="6_tdjmf"]
 [ext_resource type="PackedScene" uid="uid://bywa5slli8my6" path="res://game/items/bullet.tscn" id="7_38ei2"]
+[ext_resource type="PackedScene" uid="uid://bwqrh40qkdxl2" path="res://game/items/mouse_track.tscn" id="8_n1ms2"]
 
-[node name="Colt" type="Sprite2D" node_paths=PackedStringArray("Damage")]
+[node name="Colt" type="Sprite2D" node_paths=PackedStringArray("Damage", "Ammo", "FireType", "FireRate", "Projectile")]
 script = ExtResource("1_vnh21")
 ID = 2
 Damage = NodePath("DamageModule")
+Ammo = NodePath("AmmoModule")
+FireType = NodePath("FireTypeModule")
+FireRate = NodePath("FireRateModule")
+Projectile = NodePath("ProjectileModule")
 
 [node name="DamageModule" parent="." instance=ExtResource("2_n1ms2")]
 DamageAmount = 8.0
 
-[node name="AmmoModule" parent="." instance=ExtResource("3_qwa7k")]
+[node name="AmmoModule" parent="." node_paths=PackedStringArray("MyWeapon") instance=ExtResource("3_qwa7k")]
+MyWeapon = NodePath("..")
 MaxAmmo = 900
 CartridgeSize = 18
 
@@ -28,3 +34,6 @@ FireDelay = 0.6
 [node name="ProjectileModule" parent="." node_paths=PackedStringArray("Weapon") instance=ExtResource("6_tdjmf")]
 ProjectileScene = ExtResource("7_38ei2")
 Weapon = NodePath("..")
+
+[node name="MouseTrack" parent="." node_paths=PackedStringArray("Target") instance=ExtResource("8_n1ms2")]
+Target = NodePath("..")

@@ -1,17 +1,21 @@
 using Godot;
 using System;
+using System.Text.Json;
 
 public partial class AmmoModule : Node2D
 {
+	[Export] public Weapon MyWeapon;
 	[Export] public int MaxAmmo = 120;          // общий боезапас
 	[Export] public int CartridgeSize = 30;     // размер магазина
 	public int CurrentAmmo;                     // текущие патроны в магазине
 	public int AmmoRemaining;                   // патроны вне магазина
-
+	
 	public override void _Ready()
 	{
-		CurrentAmmo = CartridgeSize;
-		AmmoRemaining = MaxAmmo;
+		var inventory = JsonSerializer.Deserialize<PlayerIntertface.Inventory>(FileAccess.Open("res://game/player/data/inventory.json", FileAccess.ModeFlags.Read).GetAsText());
+		
+		AddAmmo(inventory.AmmoCount[MyWeapon.ID]);
+		ReloadAmmo();
 	}
 
 	public bool CanFire() => CurrentAmmo > 0;
